@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 import Skeleton from "react-loading-skeleton";
@@ -27,10 +27,9 @@ const Products = () => {
         setFilter(await response.json());
         setLoading(false);
       }
-
-      return () => {
-        componentMounted = false;
-      };
+       return () => {
+        //  componentMounted = false;
+       };
     };
 
     getProducts();
