@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef  } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import '../Assets/Dashboard.css';
+import "../Assets/Dashboard.css";
 import { Link } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
+  const [componentMounted, setComponentMounted] = useState(true);
+  // let componentMounted = true;
 
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
-    dispatch(addCart(product))
-  }
+    dispatch(addCart(product));
+  };
 
   useEffect(() => {
     const getProducts = async () => {
@@ -27,13 +28,12 @@ const Products = () => {
         setFilter(await response.json());
         setLoading(false);
       }
-       return () => {
-        //  componentMounted = false;
-       };
+      return () => {
+        setComponentMounted(false);
+      };
     };
-
     getProducts();
-  }, []);
+  }, [componentMounted]);
 
   const Loading = () => {
     return (
@@ -61,7 +61,10 @@ const Products = () => {
     return (
       <>
         {filter.map((product) => (
-          <div key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <div
+            key={product.id}
+            className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+          >
             <div className="card text-center h-100" key={product.id}>
               <img
                 className="card-img-top p-3"
@@ -81,10 +84,16 @@ const Products = () => {
                 <li className="list-group-item lead">$ {product.price}</li>
               </ul>
               <div className="card-body">
-                <Link to={"/product/" + product.id} className="btn btn-dark m-1">
+                <Link
+                  to={"/product/" + product.id}
+                  className="btn btn-dark m-1"
+                >
                   Buy Now
                 </Link>
-                <button className="btn btn-dark m-1" onClick={() => addProduct(product)}>
+                <button
+                  className="btn btn-dark m-1"
+                  onClick={() => addProduct(product)}
+                >
                   Add to Cart
                 </button>
               </div>
@@ -101,13 +110,36 @@ const Products = () => {
         <div className="col-md-3">
           {/* Side Panel with Filter Buttons */}
           <div className="buttons text-center py-5 fixed-side-panel">
-            <button className="btn btn-outline-dark btn-sm m-2 " onClick={() => setFilter(data)}><b>All</b></button>
-            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("men's clothing")}><b>Men's Clothing</b></button>
-            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("women's clothing")}>
+            <button
+              className="btn btn-outline-dark btn-sm m-2 "
+              onClick={() => setFilter(data)}
+            >
+              <b>All</b>
+            </button>
+            <button
+              className="btn btn-outline-dark btn-sm m-2"
+              onClick={() => filterProduct("men's clothing")}
+            >
+              <b>Men's Clothing</b>
+            </button>
+            <button
+              className="btn btn-outline-dark btn-sm m-2"
+              onClick={() => filterProduct("women's clothing")}
+            >
               <b>Women's Clothing</b>
             </button>
-            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("jewelery")}><b>Jewellery</b></button>
-            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("electronics")}><b>Electronics</b></button>
+            <button
+              className="btn btn-outline-dark btn-sm m-2"
+              onClick={() => filterProduct("jewelery")}
+            >
+              <b>Jewellery</b>
+            </button>
+            <button
+              className="btn btn-outline-dark btn-sm m-2"
+              onClick={() => filterProduct("electronics")}
+            >
+              <b>Electronics</b>
+            </button>
           </div>
         </div>
         <div className="col-md-9">
@@ -115,7 +147,9 @@ const Products = () => {
           <div className="container my-3 py-3">
             <div className="row">
               <div className="col-12">
-                <h2 className="display-5 text-center"><b>New Arrivals!</b></h2>
+                <h2 className="display-5 text-center">
+                  <b>New Arrivals!</b>
+                </h2>
                 <hr />
               </div>
             </div>
