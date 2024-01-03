@@ -1,0 +1,18 @@
+.fixed-side-panel {
+  position: fixed;
+  top: 0;
+  margin-top: 3rem;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 250px; /* Adjust the width as needed */
+  background-color: #f8f9fa; /* Set the background color as needed */
+  padding: 20px;
+  border-right: 1px solid #dee2e6; /* Add a border if desired */
+  z-index: 1000; /* Adjust the z-index as needed */
+}
+
+.col-md-9 {
+  margin-left: 250px; /* Adjust the margin-left to accommodate the fixed side panel width */
+}
