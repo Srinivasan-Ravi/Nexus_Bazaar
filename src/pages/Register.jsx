@@ -88,7 +88,7 @@ const Register = () => {
 
             const body = JSON.stringify({ name, email, password });
 
-            const res = await axios.post('/api/register', body, config);
+            const res = await axios.post('http://localhost:8080/register', body, config);
 
             console.log(res.data); // Do something with the response data, such as redirecting the user or displaying a success message
         } catch (err) {
