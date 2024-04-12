@@ -1,4 +1,4 @@
-package com.freshnco.backend;
+package com.nexus_bazaar.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
